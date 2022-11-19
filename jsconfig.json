@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@pages/*": ["pages/*"],
+            "@views/*": ["views/*"],
+            "@public/*": ["public/*"],
+            "@components/*": ["components/*"],
+            "@styles/*": ["styles/*"],
+            "@services/*": ["services/*"],
+            "@utils/*": ["utils/*"],
+            "@redux/*": ["redux/*"],
+            "@auth/*": ["auth/*"],
+            "@lib/*": ["lib/*"],
+            "@data/*": ["data/*"],
+            "@app/*": ["app/*"]
+        }
+    }
+}
