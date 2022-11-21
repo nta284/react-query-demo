@@ -1,5 +1,5 @@
-import { getPosts } from "@services/postsApi";
 import { useEffect, useState } from "react";
+import { getPosts } from "@services/postsApi";
 
 export default function TraditionalPosts() {
     const [posts, setPosts] = useState([]);

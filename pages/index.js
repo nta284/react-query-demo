@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { getPosts, createPost, deletePost, updatePost } from "@services/postsApi";
 import { useQuery, useQueryClient, useMutation } from "react-query";
+import { getPosts, createPost, deletePost, updatePost } from "@services/postsApi";
 import Post from "@components/home/Post";
 
 export default function Home() {
@@ -11,7 +11,14 @@ export default function Home() {
         isError,
         error,
         data: posts
-    } = useQuery('posts', getPosts);
+    } = useQuery('posts', getPosts, {
+        cacheTime: 2000,
+        staleTime: 2000,
+        refetchOnWindowFocus: true,
+        refetchOnMount: true,
+        refetchOnReconnect: true,
+        refetchInterval: 60000
+    });
 
     console.log(isLoading, isFetching);
 

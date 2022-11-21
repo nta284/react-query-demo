@@ -1,5 +1,5 @@
-import { getPosts } from "../services/postsApi";
 import { useQuery } from "react-query";
+import { getPosts } from "../services/postsApi";
 
 export default function ReactQueryPosts() {
     const {
@@ -8,15 +8,18 @@ export default function ReactQueryPosts() {
         isError,
         error,
         data: posts
-    } = useQuery('posts', getPosts);
+    } = useQuery('posts', getPosts, {
+        cacheTime: 5000,
+        staleTime: 5000,
+        refetchOnWindowFocus: true,
+        refetchOnMount: true,
+        refetchOnReconnect: true,
+        refetchInterval: 60000
+    });
 
     if (isLoading) return (
         <div className="italic">Loading ...</div>
     )
-
-    // if (isFetching) return (
-    //     <div className="italic">Fetching ...</div>
-    // )
 
     if (isError) return (
         <div className="text-red-500">{error.message}</div>
