@@ -25,14 +25,16 @@ export default function Post({ data, handleDeletePost, handleUpdatePost }) {
                 <button
                     className="text-sm text-zinc-800 hover:underline mr-3"
                     onClick={() => {
-                        isEditing
-                            ?
+                        if (isEditing) {
                             handleUpdatePost({
                                 ...data,
                                 title: titleInput.trim()
-                            })
-                            :
-                            setIsEditing(true)
+                            });
+                            setIsEditing(false);
+                        }
+                        else {
+                            setIsEditing(true);
+                        }
                     }}
                 >
                     {isEditing ? "Lưu" : "Sửa"}

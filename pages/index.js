@@ -13,9 +13,7 @@ export default function Home() {
         data: posts
     } = useQuery('posts', getPosts);
 
-    console.log(isLoading, isError, error, posts, isFetching);
-
-    const [newPostInput, setNewPostInput] = useState("");
+    console.log(isLoading, isFetching);
 
     const createPostMutation = useMutation(createPost, {
         onSuccess: () => {
@@ -26,17 +24,17 @@ export default function Home() {
 
     const deletePostMutation = useMutation(deletePost, {
         onSuccess: () => {
-            // Invalidates cache and refetch
             queryClient.invalidateQueries('posts');
         }
     })
 
     const updatePostMutation = useMutation(updatePost, {
         onSuccess: () => {
-            // Invalidates cache and refetch
             queryClient.invalidateQueries('posts');
         }
     })
+
+    const [newPostInput, setNewPostInput] = useState("");
 
     const handleCreatePost = () => {
         if (newPostInput.trim() !== "") {
@@ -60,9 +58,9 @@ export default function Home() {
         <div className="italic">Loading ...</div>
     )
 
-    if (isFetching) return (
-        <div className="italic">Fetching ...</div>
-    )
+    // if (isFetching) return (
+    //     <div className="italic">Fetching ...</div>
+    // )
 
     if (isError) return (
         <div className="text-red-500">{error.message}</div>
@@ -80,12 +78,18 @@ export default function Home() {
                     onChange={e => setNewPostInput(e.target.value)}
                 />
                 <button
-                    className="py-1 px-2 border border-black/50 rounded-sm "
+                    className="py-1 px-2 border border-black/50 rounded-sm mr-2"
                     onClick={handleCreatePost}
                 >Thêm</button>
+                <button
+                    className="py-1 px-2 border border-black/50 rounded-sm"
+                    onClick={() => {
+                        queryClient.invalidateQueries('posts');
+                    }}
+                >Đồng bộ</button>
             </div>
             <div className="flex flex-col gap-3">
-                {posts.map(post => (
+                {posts.data.map(post => (
                     <Post
                         key={post._id}
                         data={post}

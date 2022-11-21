@@ -3,11 +3,15 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Layout from "@components/layout";
 
+// const queryClient = new QueryClient();
+
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
+            // cacheTime: 5000,
+            // staleTime: 10000,
             refetchOnWindowFocus: true,
-            refetchOnMount: false
+            refetchOnMount: true
         }
     }
 });

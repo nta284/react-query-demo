@@ -18,7 +18,7 @@ export default async (req, res) => {
                     code: 200,
                     data: result
                 });
-            }, 1000)
+            }, 2000)
         }
         catch (err) {
             console.log(err);
