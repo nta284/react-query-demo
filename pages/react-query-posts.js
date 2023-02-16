@@ -8,14 +8,7 @@ export default function ReactQueryPosts() {
         isError,
         error,
         data: posts
-    } = useQuery('posts', getPosts, {
-        cacheTime: 5000,
-        staleTime: 5000,
-        refetchOnWindowFocus: true,
-        refetchOnMount: true,
-        refetchOnReconnect: true,
-        refetchInterval: 60000
-    });
+    } = useQuery('posts', getPosts);
 
     if (isLoading) return (
         <div className="italic">Loading ...</div>

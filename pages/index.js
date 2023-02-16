@@ -11,20 +11,13 @@ export default function Home() {
         isError,
         error,
         data: posts
-    } = useQuery('posts', getPosts, {
-        cacheTime: 2000,
-        staleTime: 2000,
-        refetchOnWindowFocus: true,
-        refetchOnMount: true,
-        refetchOnReconnect: true,
-        refetchInterval: 60000
-    });
+    } = useQuery('posts', getPosts);
 
     console.log(isLoading, isFetching);
 
     const createPostMutation = useMutation(createPost, {
         onSuccess: () => {
-            // Invalidates cache and refetch
+            // Refetch thủ công
             queryClient.invalidateQueries('posts');
         }
     })
@@ -46,6 +39,7 @@ export default function Home() {
     const handleCreatePost = () => {
         if (newPostInput.trim() !== "") {
             createPostMutation.mutate({
+                // Được truyền vào params của hàm createPost
                 title: newPostInput.trim()
             })
 
