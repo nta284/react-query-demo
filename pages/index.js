@@ -13,7 +13,7 @@ export default function Home() {
         data: posts
     } = useQuery('posts', getPosts);
 
-    console.log(isLoading, isFetching);
+    // console.log(isLoading, isFetching);
 
     const createPostMutation = useMutation(createPost, {
         onSuccess: () => {
